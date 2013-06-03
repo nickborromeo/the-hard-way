@@ -37,10 +37,10 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-  first_not = s.find("not")
-  first_bad = s.find("bad")
-  if first_not < first_bad:
-    return s.replace(s[first_not:first_bad + 3], "good")
+  n = s.find("not")
+  b = s.find("bad")
+  if n != -1  and b != -1 and n < b:
+    return s.replace(s[n:b + 3], "good")
 
   return s
 
@@ -53,30 +53,15 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  a_front =  ""
-  a_back = ""
-  b_front = ""
-  b_back = ""
+  a_mid = len(a) / 2
+  b_mid = len(b) / 2
 
-  len_a = len(a)
-  mid_a = len_a / 2
-  if len_a % 2 == 0:
-   a_front = a[:mid_a]
-   a_back = a[mid_a:]
-  else: 
-   a_front = a[:mid_a + 1]
-   a_back = a[mid_a+1:]
+  if len(a) % 2 == 1:
+    a_mid += 1
+  if len(b) % 2 == 1:
+    b_mid += 1
 
-  len_b = len(b)
-  mid_b = len_b / 2
-  if len_b % 2 == 0:
-   b_front = b[:mid_b]
-   b_back = b[mid_b:]
-  else: 
-   b_front = b[:mid_b + 1]
-   b_back = b[mid_b+1:]
-
-  return a_front + b_front + a_back + b_back 
+  return a[:a_mid] + b[:b_mid] + a[a_mid:] + b[b_mid:]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
