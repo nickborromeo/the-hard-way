@@ -44,13 +44,21 @@ import sys
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+MAX = 20
+
+def print_top(filename):
+  dictionary = build_dictionary(filename)
+  word_rankings = sorted(dictionary.items(), key=rank_dictionary, reverse=True)
+  for ranking in word_rankings[:MAX]:
+    print ranking[0], ranking[1]
+    
+def rank_dictionary(dictionary):
+  return dictionary[1]
 
 def print_words(filename):
   dictionary =  build_dictionary(filename)
   for k, v in dictionary.items():
     print k, dictionary[k]
-
-  return
 
 def build_dictionary(filename):
   f = open(filename, 'rU')
